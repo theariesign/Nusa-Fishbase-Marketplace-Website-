@@ -1,0 +1,25 @@
+{% extends "base_penjual.html" %}
+
+{% block content %}
+<h2>Channel Distributor</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nama Distributor</th>
+            <th>Kontak</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for distributor in distributors %}
+        <tr>
+            <td>{{ distributor.nama_restoran }}</td>
+            <td>{{ distributor.contact }}</td>
+            <td>
+                <!-- Add action buttons for managing distributor channels here -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

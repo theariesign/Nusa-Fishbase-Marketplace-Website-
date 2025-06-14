@@ -1,0 +1,217 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    color: #007498;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    position: relative;
+    background-color: #007498;
+    height: 200px;
+    border-bottom-left-radius: 50% 100px;
+    border-bottom-right-radius: 50% 100px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 260px;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: 3em;
+  }
+
+  .contact {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+
+  .contact-item {
+    background-color: #f4f4f4;
+    border: 1px solid #007498;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .contact-item h3 {
+    margin: 10px 0;
+    color: #007498;
+  }
+
+  .contact-item p {
+    margin: 5px 0;
+  }
+
+  .map-container {
+    margin-top: 20px;
+    position: relative;
+    padding-bottom: 50%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  footer {
+    background-color: #007498;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer .footer-content div {
+    flex: 1;
+    margin: 10px;
+  }
+
+  footer .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+  }
+
+  footer .social-icons img:hover {
+    transform: scale(1.2);
+  }
+</style>
+<div class="header">
+  <h1>Kontak Kami</h1>
+  <p>
+    Hubungi kami untuk informasi lebih lanjut mengenai Nusa Fishbase
+    Marketplace.
+  </p>
+</div>
+<div class="contact">
+  <div class="contact-info">
+    <div class="contact-item">
+      <img
+        src="https://img.icons8.com/ios-filled/50/007498/phone.png"
+        alt="Telepon"
+      />
+      <h3>Telepon</h3>
+      <p>(+62) 123-456-789</p>
+    </div>
+    <div class="contact-item">
+      <img
+        src="https://img.icons8.com/ios-filled/50/007498/email.png"
+        alt="Email"
+      />
+      <h3>Email</h3>
+      <p>info@nusafishbase.com</p>
+    </div>
+    <div class="contact-item">
+      <img
+        src="https://img.icons8.com/ios-filled/50/007498/address.png"
+        alt="Alamat"
+      />
+      <h3>Alamat</h3>
+      <p>Pantai Depok, Bantul, Yogyakarta, Indonesia</p>
+    </div>
+    <div class="contact-item">
+      <img
+        src="https://img.icons8.com/ios-filled/50/007498/clock.png"
+        alt="Jam Operasional"
+      />
+      <h3>Jam Operasional</h3>
+      <p>Senin - Jumat: 09.00 - 18.00</p>
+      <p>Sabtu: 09.00 - 14.00</p>
+      <p>Minggu: Tutup</p>
+    </div>
+  </div>
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.185199344947!2d110.2947586147766!3d-8.018315594218134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7bba891cd333b9%3A0xb6681b11491a4fc1!2sPantai%20Depok%2C%20Parangtritis%2C%20Kec.%20Kretek%2C%20Kabupaten%20Bantul%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sen!2sid!4v1620995362832!5m2!1sen!2sid"
+      width="600"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+    >
+    </iframe>
+  </div>
+</div>
+<footer>
+  <div class="footer-content">
+    <div>
+      <h3>Nusa Fishbase</h3>
+      <p>Menyediakan informasi lengkap mengenai pasar ikan di Indonesia.</p>
+    </div>
+    <div>
+      <h3>Ikuti Kami</h3>
+      <div class="social-icons">
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png"
+            alt="Facebook"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
+            alt="Instagram"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png"
+            alt="Twitter"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+            alt="LinkedIn"
+        /></a>
+      </div>
+    </div>
+    <div>
+      <h3>Kontak</h3>
+      <p>Email: info@nusafishbase.com</p>
+      <p>Telepon: (+62) 123-456-789</p>
+    </div>
+  </div>
+  <p>&copy; 2024 Nusa Fishbase. All Rights Reserved.</p>
+</footer>
+{% endblock %}

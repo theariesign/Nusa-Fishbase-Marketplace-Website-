@@ -1,0 +1,321 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+html,
+body {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background-image: url("https://www.pasarmikro.id/buletin/wp-content/uploads/sites/6/2023/07/pasarmikro-slider-bg-nelayan-indonesia-menghadapi-tantangan-perubahan-iklim-51-1920p-990p.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: #1a75ff;
+  color: #fff;
+}
+.wrapper {
+  overflow: hidden;
+  max-width: 390px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.wrapper .title-text {
+  display: flex;
+  width: 200%;
+}
+
+.wrapper .title {
+  width: 50%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .slide-controls {
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+}
+
+.slide-controls {
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+}
+
+.slide-controls .slide {
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.slide-controls label.signup {
+  color: #000;
+}
+
+.slide-controls .slider-tab {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 15px;
+  background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
+}
+
+.wrapper .form-inner form .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Menambahkan jarak bawah antara setiap field */
+}
+
+.wrapper .form-inner form .field p {
+  margin-bottom: 5px; /* Menambahkan jarak bawah antara p dan input */
+}
+
+.wrapper .form-inner form .field input {
+  width: calc(
+    100% - 10px
+  ); /* Menentukan lebar input tanpa mengurangi lebar keseluruhan field */
+}
+
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+.password-field input {
+  height: 100%;
+  width: calc(
+    100% - 15px
+  ); /* Sedikit kurangi lebar untuk membuat ruang bagi teks "Tampilkan" */
+  outline: none;
+  padding-left: 15px;
+  border-radius: 15px;
+  border: 1px solid lightgrey;
+  border-right: none;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+
+.password-field .toggle-password {
+  position: absolute;
+  top: 10px;
+  right: 70px;
+  height: 100%;
+  width: 0px; /* Lebar tombol tampilkan/sembunyikan */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border: 1px solid lightgrey;
+  border-left: none; /* Hilangkan garis kiri */
+  border-radius: 0 15px 15px 0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.password-field .toggle-password:hover {
+  background-color: #ddd;
+}
+
+/* Sembunyikan teks password saat input dalam mode sandi */
+.password-field input[type="password"] {
+  -webkit-text-security: disc; /* Safari */
+  text-security: disc; /* Firefox */
+}
+
+#login:checked ~ .form-inner form.login,
+#signup:checked ~ .form-inner form.signup {
+  display: block;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#signup:checked ~ .slider-tab {
+  left: 50%;
+}
+
+#signup:checked ~ label.signup {
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
+
+#signup:checked ~ label.login {
+  color: #000;
+}
+
+#login:checked ~ label.signup {
+  color: #000;
+}
+
+#login:checked ~ label.login {
+  cursor: default;
+  user-select: none;
+}
+
+.wrapper .form-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.form-container .form-inner {
+  display: flex;
+  width: 200%;
+}
+
+.form-container .form-inner form {
+  width: 50%;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-inner form .field {
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-inner form .field input {
+  height: 100%;
+  width: calc(
+    100% - 20px
+  ); /* Menentukan lebar input dengan mengurangi 20px dari lebar keseluruhan field */
+  outline: none;
+  padding-left: 15px;
+  border-radius: 15px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+
+.form-inner form .field input[type="password"] {
+  width: calc(
+    100% - 120px
+  ); /* Lebar input password sedikit lebih kecil untuk memberi ruang untuk tombol tampilkan/sembunyikan */
+}
+
+.form-inner form .field input:focus {
+  border-color: #1a75ff;
+}
+
+.form-inner form .field input::placeholder {
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+form .field input:focus::placeholder {
+  color: #1a75ff;
+}
+.form-inner form .pass-link {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pass-link label {
+  margin-right: 90px;
+}
+
+.pass-link input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.form-inner form .signup-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-inner form .pass-link a,
+.form-inner form .signup-link a {
+  color: #1a75ff;
+  text-decoration: none;
+}
+
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover {
+  text-decoration: underline;
+}
+
+form .btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+form .btn .btn-layer {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(
+    right,
+    #003366,
+    #004080,
+    #0059b3,
+    #0073e6
+  );
+  border-radius: 15px;
+  transition: all 0.4s ease;
+}
+
+form .btn:hover .btn-layer {
+  left: 0;
+}
+
+form .btn input[type="submit"] {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}

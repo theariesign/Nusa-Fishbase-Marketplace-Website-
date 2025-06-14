@@ -1,0 +1,41 @@
+{% extends 'base_penjual.html' %} {% block content %}
+<style>
+  body {
+    background-image: url("{{ url_for('static', filename='images/konten/depok3.jpg') }}");
+    /* Ganti 'background.jpg' dengan nama file gambar latar belakang Anda */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Menghilangkan kemampuan scroll */
+    display: flex; /* Menggunakan flexbox */
+    justify-content: center; /* Memposisikan konten ke tengah secara horizontal */
+    align-items: center; /* Memposisikan konten ke tengah secara vertikal */
+    image-rendering: pixelated;
+  }
+
+  .content {
+    margin-top: 80px; /* Menambahkan margin-top agar jumbotron berjarak dari navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(
+      100vh - 80px
+    ); /* Mengatur tinggi konten agar tidak tumpang tindih dengan navbar */
+  }
+
+  .jumbotron {
+    background-color: rgba(255, 255, 255, 0.7); /* Menambahkan transparansi */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+</style>
+<div class="jumbotron mx-auto">
+  <h1 class="display-4">Selamat Datang di Nusa Fishbase</h1>
+  <p class="lead">kelola toko Anda dengan mudah..</p>
+  <hr class="my-4" />
+  <p>Temukan berbagai produk ikan terbaik di sini</p>
+</div>
+{% endblock %}

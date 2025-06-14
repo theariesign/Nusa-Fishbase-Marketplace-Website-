@@ -1,0 +1,101 @@
+{% extends "base_penjual.html" %}
+{% block content %}
+<style>
+  h2{
+    margin-bottom: 30px;
+  }
+
+  .btn-aksi {
+    margin-right: 5px; /* Jarak antara tombol */
+  }
+  
+  .btn-aksi a {
+    text-decoration: none; /* Menghapus dekorasi tautan */
+    color: white; /* Warna teks tombol */
+  }
+  
+  .btn-success {
+    background-color: #28a745; /* Warna latar belakang tombol terima */
+  }
+  
+  .btn-cancel {
+    background-color: #dc3545; /* Warna latar belakang tombol batalkan */
+  }
+
+  .header {
+    background-color: #e6f2ff; /* Warna biru muda */
+    text-align: center; /* Posisi teks di tengah */
+    padding: 20px; /* Berikan padding untuk ruang di sekitar teks */
+  }
+
+  .header h1 {
+    margin: 0; /* Hapus margin bawaan */
+  }
+</style>
+
+<div class="header">
+  <h1>Pesanan</h2>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Pembeli</th>
+      <th>Produk</th>
+      <th>Jumlah</th>
+      <th>Harga</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.user_email }}</td>
+      <td>{{ order.product_name }}</td>
+      <td>{{ order.product_quantity }}</td>
+      <td>{{ order.total_price }}</td>
+      <td>
+        <form action="{{ url_for('update_status', order_id=order._id|string) }}" method="POST">
+          <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="Menunggu Konfirmasi Penjual" {% if order.status == 'Menunggu Konfirmasi Penjual' %}selected{% endif %}>Menunggu Konfirmasi Penjual</option>
+            <option value="pesanan diterima penjual" {% if order.status == 'pesanan diterima penjual' %}selected{% endif %}>Pesanan diterima penjual</option>
+            <option value="pesanan sedang dikemas" {% if order.status == 'pesanan sedang dikemas' %}selected{% endif %}>Pesanan sedang dikemas</option>
+            <option value="pesanan sedang dikirim" {% if order.status == 'pesanan sedang dikirim' %}selected{% endif %}>Pesanan sedang dikirim</option>
+            <option value="pesanan diterima pembeli" {% if order.status == 'pesanan diterima pembeli' %}selected{% endif %}>Pesanan diterima pembeli</option>
+            <option value="pesanan dibatalkan" {% if order.status == 'pesanan dibatalkan' %}selected{% endif %}>Pesanan dibatalkan</option>
+          </select>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+<script>
+  document.getElementById('statusSelect').addEventListener('change', function() {
+    var status = this.value;
+    var orderId = "{{ order._id|string }}";
+
+    // Kirim permintaan AJAX untuk memperbarui status pesanan
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "/update_status/" + orderId, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        // Tangani respon sukses dari server
+        var response = JSON.parse(xhr.responseText);
+        if (status === "pesanan dibatalkan" && response.success) {
+          // Jika pesanan dibatalkan, hapus pesanan dari daftar pesanan
+          // dan tambahkan ke data penjualan (sales)
+          window.location.reload(); // Muat ulang halaman setelah memperbarui status pesanan
+        }
+      } else {
+        // Tangani kesalahan dari server
+        console.error('Terjadi kesalahan: ' + xhr.statusText);
+      }
+    };
+    xhr.onerror = function() {
+      console.error('Permintaan gagal');
+    };
+    xhr.send(JSON.stringify({ status: status }));
+  });
+</script>

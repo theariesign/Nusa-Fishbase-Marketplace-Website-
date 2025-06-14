@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Membuat Form Login</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="form-container">
+        <div class="slide-controls">
+          <input type="radio" name="slide" id="login" checked />
+          <input type="radio" name="slide" id="signup" />
+          <label for="login" class="slide login">Login</label>
+          <label for="signup" class="slide signup">Daftar</label>
+          <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+          <form action="/login" class="login" method="POST">
+            <pre></pre>
+            <div class="field">
+              <p>Masukan Email*</p>
+              <input type="text" placeholder="Masukan Email " required />
+            </div>
+            <div class="password-field">
+              <label for="passwordLogin" class="password-label">
+                <p>Masukan Password*</p>
+                <input
+                  type="password"
+                  id="passwordLogin"
+                  placeholder="Masukkan Password"
+                  required
+                />
+                <span
+                  id="toggleButtonPasswordLogin"
+                  onclick="togglePassword('passwordLogin')"
+                  class="toggle-password"
+                >
+                  Tampilkan
+                </span>
+              </label>
+            </div>
+            <div class="pass-link">
+              <input type="checkbox" id="remember-me" />
+              <label for="remember-me">Ingat Saya</label>
+              <a href="/reset">Lupa password?</a>
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Masuk" />
+            </div>
+          </form>
+          <form action="/daftar" class="signup" method="POST">
+            <div class="field">
+              <p>Masukan Nama*</p>
+              <input type="text" placeholder="Masukan Nama" required />
+            </div>
+            <div class="field">
+              <p>Masukan Email*</p>
+              <input type="text" placeholder="Masukan Email" required />
+            </div>
+            <div class="password-field">
+              <label for="passwordSignup" class="password-label">
+                <p>Masukan Password*</p>
+                <input
+                  type="password"
+                  id="passwordSignup"
+                  placeholder="Masukkan Password"
+                  required
+                />
+                <span
+                  id="toggleButtonPasswordSignup"
+                  onclick="togglePassword('passwordSignup')"
+                  class="toggle-password"
+                >
+                  Tampilkan
+                </span>
+              </label>
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Daftar" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/static/script.js"></script>
+    <script>
+      function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const button = document.getElementById(
+          `toggleButton${inputId.charAt(0).toUpperCase() + inputId.slice(1)}`
+        );
+        if (input.type === "password") {
+          input.type = "text";
+          button.textContent = "Sembunyikan";
+        } else {
+          input.type = "password";
+          button.textContent = "Tampilkan";
+        }
+      }
+    </script>
+  </body>
+</html>

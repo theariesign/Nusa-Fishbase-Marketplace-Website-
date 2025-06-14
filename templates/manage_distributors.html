@@ -1,0 +1,54 @@
+<!-- manage_distributors.html -->
+{% extends 'admin_dashboard.html' %} {% block content %}
+<div class="container">
+  <h1 class="text-center my-4">Manage Distributors</h1>
+  <div class="mb-3">
+    <a href="{{ url_for('add_distributor') }}" class="btn btn-success"
+      >Tambah Distributor</a
+    >
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Nama Restoran</th>
+          <th>Alamat</th>
+          <th>Kontak</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for distributor in distributors %}
+        <tr>
+          <td>
+            <img
+              src="{{ url_for('static', filename='images/' + distributor.image) }}"
+              class="img-thumbnail"
+              alt="{{ distributor.nama_restoran }}"
+            />
+          </td>
+          <td>{{ distributor.nama_restoran }}</td>
+          <td>{{ distributor.alamat }}</td>
+          <td>{{ distributor.kontak }}</td>
+          <td>
+            <a
+              href="{{ url_for('edit_distributor', distributor_id=distributor._id) }}"
+              class="btn btn-primary"
+              >Edit</a
+            >
+            <form
+              action="{{ url_for('delete_distributor', distributor_id=distributor._id) }}"
+              method="post"
+              style="display: inline-block"
+            >
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

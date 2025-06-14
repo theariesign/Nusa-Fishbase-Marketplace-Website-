@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <title>Admin Dashboard - Nusa Fishbase</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Spinnaker&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        font-family: "Spinnaker", sans-serif;
+      }
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 250px;
+        background-color: #f8f9fa;
+        padding-top: 50px;
+        overflow-y: auto;
+      }
+      .sidebar-link {
+        display: block;
+        padding: 10px 20px;
+        color: #333;
+        text-decoration: none;
+      }
+      .sidebar-link.active {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="{{ url_for('admin_dashboard') }}" class="sidebar-link active"
+        >Dashboard</a
+      >
+      <a href="{{ url_for('manage_blog') }}" class="sidebar-link"
+        >Manage Blog</a
+      >
+      <a href="{{ url_for('manage_seller') }}" class="sidebar-link"
+        >Manage Sellers</a
+      >
+      <a href="{{ url_for('manage_distributors') }}" class="sidebar-link"
+        >Manage Distributors</a
+      >
+      <a href="{{ url_for('logout') }}" class="sidebar-link">Logout</a>
+    </div>
+    <div class="main-content">{% block content %}{% endblock %}</div>
+  </body>
+</html>

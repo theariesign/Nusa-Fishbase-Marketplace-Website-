@@ -1,0 +1,27 @@
+{% extends "base_penjual.html" %}
+
+{% block content %}
+<h2>Ulasan</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Pembeli</th>
+            <th>Produk</th>
+            <th>Ulasan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review.buyer }}</td>
+            <td>{{ review.product_name }}</td>
+            <td>{{ review.review }}</td>
+            <td>
+                <!-- Add response button and logic here -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

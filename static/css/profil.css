@@ -1,0 +1,266 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2599c4;
+  color: white;
+  padding: 10px;
+  height: 80px; /* Adjust height as needed */
+}
+
+.navbar-logo img {
+  height: 290px; /* Adjust height as needed */
+  margin-right: 10px;
+  margin-top: 40px;
+}
+
+.navbar-actions button {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 350px;
+  background-color: #2599c4;
+  padding-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin-top: 55px;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.sidebar ul li {
+  padding: 20px;
+  text-align: left;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}
+
+.navbar-icon {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.navbar-icon a {
+  color: white;
+}
+
+/* Tambahkan aturan gaya ikon */
+.navbar-icon a i {
+  margin-right: 5px; /* Jarak antara ikon dan teks */
+}
+
+/* Aturan gaya ikon spesifik untuk setiap tautan */
+.navbar-icon a[href="{{ url_for('produk') }}"] i {
+  color: white; /* Warna ikon untuk Produk */
+}
+
+.navbar-icon a[href="{{ url_for('notifikasi') }}"] i {
+  color: white; /* Warna ikon untuk Notifikasi */
+}
+
+.navbar-icon a[href="{{ url_for('pesanan') }}"] i {
+  color: white; /* Warna ikon untuk Pesanan */
+}
+
+.navbar-icon
+  a[href="{{ url_for('chat_pembeli', username='nama_pengguna') }}"]
+  i {
+  color: white; /* Warna ikon untuk Chat Pembeli */
+}
+
+.navbar-icon a[href="{{ url_for('distributor') }}"] i {
+  color: white; /* Warna ikon untuk Channel Distributor */
+}
+
+.navbar-icon a[href="{{ url_for('profil') }}"] i {
+  color: white; /* Warna ikon untuk Profil */
+}
+#time-weather {
+  margin-top: auto; /* Mengatur agar elemen di bawah profil */
+  padding: 5px;
+  background-color: #f5f5f5; /* Menyesuaikan warna latar belakang */
+  border-top: 1px solid #ddd; /* Menambahkan garis pemisah */
+}
+
+@keyframes skyAnimation {
+  0% {
+    background-color: #87ceeb; /* Biru langit */
+  }
+  50% {
+    background-color: #d8d8d8; /* Warna netral */
+  }
+  100% {
+    background-color: #87ceeb; /* Kembali ke biru langit */
+  }
+}
+
+/* Animasi awan */
+@keyframes cloudAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Gaya untuk element waktu dan cuaca */
+#time-weather {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #87ceeb; /* Biru langit awal */
+  animation: skyAnimation 10s infinite; /* Animasi langit */
+}
+
+#time,
+#weather {
+  font-size: 24px;
+  color: #fff; /* Warna teks putih */
+}
+
+#clouds {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+#clouds .cloud {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 100px;
+  background-color: #fff; /* Warna awan */
+  animation: cloudAnimation 60s linear infinite; /* Animasi awan */
+}
+
+#clouds .cloud:nth-child(2) {
+  left: 20%;
+  animation-duration: 70s; /* Durasi animasi awan kedua */
+}
+
+#clouds .cloud:nth-child(3) {
+  left: 60%;
+  animation-duration: 80s; /* Durasi animasi awan ketiga */
+}
+
+#time,
+#weather {
+  padding-bottom: 15px;
+}
+.container {
+  max-width: 1180px;
+  width: 100%;
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-left: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-bottom: 20px; /* Memberikan jarak bawah antar form-group */
+}
+
+/* Gaya untuk container profile-pic */
+.profile-pic {
+  display: flex;
+  align-items: center;
+}
+
+/* Gaya untuk tombol upload gambar */
+.image-upload {
+  border-radius: 20px; /* Menambahkan border radius 20px */
+  margin-right: 10px; /* Memberikan jarak dari tepi kanan */
+  overflow: hidden; /* Mengatasi overflow gambar yang melebihi batas */
+}
+
+/* Gaya untuk gambar profil */
+.image-upload img {
+  width: 100px; /* Mengatur lebar gambar */
+  height: 100px; /* Mengatur tinggi gambar */
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+button[type="submit"],
+button[type="button"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="button"] {
+  background-color: #f44336;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #45a049;
+}
+
+button[type="button"]:hover {
+  background-color: #d32f2f;
+}

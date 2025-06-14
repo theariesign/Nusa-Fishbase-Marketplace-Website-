@@ -1,0 +1,67 @@
+{% extends "base_penjual.html" %} {% block content %}
+<style>
+  .header {
+    background-color: #e6f2ff; /* Warna biru muda */
+    text-align: center; /* Posisi teks di tengah */
+    padding: 20px; /* Berikan padding untuk ruang di sekitar teks */
+  }
+
+  .header h1 {
+    margin: 0; /* Hapus margin bawaan */
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto; /* Tambahkan bar horizontal jika tabel terlalu lebar */
+  }
+  
+  th, td {
+    width: auto; /* Atur lebar sel sesuai konten */
+    white-space: nowrap; /* Biarkan konten tidak pindah baris */
+  }
+  
+  th:nth-child(2), td:nth-child(2) {
+    max-width: 200px; /* Atur lebar maksimum kolom deskripsi */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Tampilkan elipsis jika konten terlalu panjang */
+  }
+</style>
+
+<div class="header">
+  <h1>Kelola Produk</h2>
+</div>
+<a href="{{ url_for('add_produk') }}" class="btn btn-primary mb-3" style="margin-top: 15px; width: 100%; font-size: 20px"
+  >Tambah Produk</a
+>
+<div class="table-container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nama Produk</th>
+        <th>Deskripsi</th>
+        <th>Harga</th>
+        <th>Stok</th>
+        <th>Gambar</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>
+          <img src="{{ url_for('static', filename='images/konten/' + product.image) }}" alt="{{ product.name }}" style="width: 100px" />
+        </td>
+        <td>
+          <a href="{{ url_for('edit_produk', product_id=product._id) }}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{{ url_for('delete_produk', product_id=product._id) }}" class="btn btn-danger btn-sm">Hapus</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

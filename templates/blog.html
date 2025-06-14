@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .header {
+    position: relative;
+    background-color: #007498;
+    height: 200px;
+    border-bottom-left-radius: 50% 100px;
+    border-bottom-right-radius: 50% 100px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -25px;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: 3em;
+  }
+
+  footer {
+    background-color: #007498;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer .footer-content div {
+    flex: 1;
+    margin: 10px;
+  }
+
+  footer .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+  }
+
+  footer .social-icons img:hover {
+    transform: scale(1.2);
+  }
+</style>
+<div class="header">
+  <h1>BLOG</h1>
+</div>
+<div class="articles" style="margin-top: 25px">
+  {% for article in articles %}
+  <div class="article">
+    <img
+      src="{{ url_for('static', filename='images/konten/' + article.image) }}"
+      alt="{{ article.title }}"
+    />
+    <div>
+      <h3>{{ article.title }}</h3>
+      <p>Dipublikasikan tanggal {{ article.published_date }}</p>
+    </div>
+  </div>
+  <!-- Container untuk menampilkan isi artikel -->
+  <div style="padding: 20px; display: block">{{ article.content|safe }}</div>
+  {% endfor %}
+</div>
+<footer>
+  <div class="footer-content">
+    <div>
+      <h3>Nusa Fishbase</h3>
+      <p>Menyediakan informasi lengkap mengenai pasar ikan di Indonesia.</p>
+    </div>
+    <div>
+      <h3>Ikuti Kami</h3>
+      <div class="social-icons">
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png"
+            alt="Facebook"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
+            alt="Instagram"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png"
+            alt="Twitter"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+            alt="LinkedIn"
+        /></a>
+      </div>
+    </div>
+    <div>
+      <h3>Kontak</h3>
+      <p>Email: info@nusafishbase.com</p>
+      <p>Telepon: (+62) 123-456-789</p>
+    </div>
+  </div>
+  <p>&copy; 2024 Nusa Fishbase. All Rights Reserved.</p>
+</footer>
+{% endblock %}

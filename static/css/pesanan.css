@@ -1,0 +1,234 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2599c4;
+  color: white;
+  padding: 10px;
+  height: 80px; /* Adjust height as needed */
+}
+
+.navbar-logo img {
+  height: 290px; /* Adjust height as needed */
+  margin-right: 10px;
+  margin-top: 40px;
+}
+
+.navbar-actions button {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 350px;
+  background-color: #2599c4;
+  padding-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin-top: 55px;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.sidebar ul li {
+  padding: 20px;
+  text-align: left;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}
+
+.navbar-icon {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.navbar-icon a {
+  color: white;
+}
+
+/* Tambahkan aturan gaya ikon */
+.navbar-icon a i {
+  margin-right: 5px; /* Jarak antara ikon dan teks */
+}
+
+/* Aturan gaya ikon spesifik untuk setiap tautan */
+.navbar-icon a[href="{{ url_for('produk') }}"] i {
+  color: white; /* Warna ikon untuk Produk */
+}
+
+.navbar-icon a[href="{{ url_for('notifikasi') }}"] i {
+  color: white; /* Warna ikon untuk Notifikasi */
+}
+
+.navbar-icon a[href="{{ url_for('pesanan') }}"] i {
+  color: white; /* Warna ikon untuk Pesanan */
+}
+
+.navbar-icon
+  a[href="{{ url_for('chat_pembeli', username='nama_pengguna') }}"]
+  i {
+  color: white; /* Warna ikon untuk Chat Pembeli */
+}
+
+.navbar-icon a[href="{{ url_for('distributor') }}"] i {
+  color: white; /* Warna ikon untuk Channel Distributor */
+}
+
+.navbar-icon a[href="{{ url_for('profil') }}"] i {
+  color: white; /* Warna ikon untuk Profil */
+}
+
+#time-weather {
+  margin-top: auto; /* Mengatur agar elemen di bawah profil */
+  padding: 5px;
+  background-color: #f5f5f5; /* Menyesuaikan warna latar belakang */
+  border-top: 1px solid #ddd; /* Menambahkan garis pemisah */
+}
+
+#time,
+#weather {
+  padding-bottom: 15px;
+}
+
+.wrapper {
+  width: calc(100% - 370px); /* Width minus sidebar width and some margin */
+  max-width: 1250px; /* Maximum width */
+  margin: 50px auto 50px 370px; /* Center wrapper and leave space for sidebar */
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.title-text {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.slide-controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0 10px 0;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+  position: relative;
+}
+
+.slide {
+  width: 20%;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  z-index: 1;
+  color: #000; /* Text color set to black */
+}
+
+.slider-tab {
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  left: 0;
+  z-index: 0;
+  border-radius: 25px;
+  background-color: #2599c4;
+  transition: transform 0.3s ease;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status {
+  padding: 10px;
+}
+
+.status h3 {
+  margin-top: 0;
+}
+
+.order {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.product-price {
+  font-size: 16px;
+  color: #2599c4;
+  font-weight: bold;
+  text-align: right;
+}
+
+.product:last-child {
+  border-bottom: none;
+}

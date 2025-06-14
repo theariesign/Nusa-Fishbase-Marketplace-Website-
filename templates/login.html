@@ -1,0 +1,246 @@
+{% extends 'base.html' %} {% block content %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+<style>
+  body {
+    position: relative;
+    margin-top: 0; /* Adjust based on your navbar height */
+    background: url("{{ url_for('static', filename='images/konten/orang2.jpg') }}")
+      no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 70px); /* Adjust based on your navbar height */
+  }
+
+  .login-card {
+    display: flex;
+    flex-direction: row;
+    max-width: 600px; /* Set a max-width for the card */
+    width: 100%; /* Make card take full width within max-width */
+    height: 300px; /* Set a fixed height to make it more square-like */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visual */
+    background: none; /* Make background transparent */
+    margin-left: -40px;
+  }
+
+  .card-body {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    margin-top: 30px;
+    border-radius: 0; /* Make the button square */
+  }
+
+  .header {
+    position: relative;
+    background-color: #007498;
+    height: 200px;
+    border-bottom-left-radius: 50% 100px;
+    border-bottom-right-radius: 50% 100px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -50px;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: 3em;
+  }
+
+  .header p {
+    margin: 10px;
+    font-size: 1.2em;
+  }
+
+  .login-container {
+    margin-top: -130px;
+    margin-bottom: -150px;
+  }
+
+  .login-card {
+    background-color: #999999;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .card-title {
+    color: #007498;
+  }
+
+  .input-group-text {
+    background-color: #007498;
+    color: white;
+  }
+
+  .btn-primary {
+    background-color: #007498;
+    border-color: #007498;
+  }
+
+  .btn-primary:hover {
+    background-color: #005f73;
+    border-color: #005f73;
+  }
+
+  footer {
+    background-color: #007498;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer .footer-content div {
+    flex: 1;
+    margin: 10px;
+  }
+
+  footer .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+  }
+
+  footer .social-icons img:hover {
+    transform: scale(1.2);
+  }
+</style>
+<div class="header">
+  <h1>Login</h1>
+  <p>
+    Harap login terlebih dahulu, untuk bisa menikmati fitur dari Marketplace
+    Nusa Fishbase
+  </p>
+</div>
+
+<div class="container login-container">
+  <div class="card login-card">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-4" style="color: white">
+        Masukan email dan password
+      </h5>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+      <form action="/login" method="post">
+        <div class="mb-3">
+          <label for="email" class="form-label"></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><i class="fa fa-envelope"></i
+              ></span>
+            </div>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              class="form-control"
+              placeholder="Email"
+              required
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label"></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+            </div>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div>
+      <h3>Nusa Fishbase</h3>
+      <p>Menyediakan informasi lengkap mengenai pasar ikan di Indonesia.</p>
+    </div>
+    <div>
+      <h3>Ikuti Kami</h3>
+      <div class="social-icons">
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png"
+            alt="Facebook"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
+            alt="Instagram"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png"
+            alt="Twitter"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+            alt="LinkedIn"
+        /></a>
+      </div>
+    </div>
+    <div>
+      <h3>Kontak</h3>
+      <p>Email: info@nusafishbase.com</p>
+      <p>Telepon: (+62) 123-456-789</p>
+    </div>
+  </div>
+  <p>&copy; 2024 Nusa Fishbase. All Rights Reserved.</p>
+</footer>
+{% endblock %}

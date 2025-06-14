@@ -1,0 +1,55 @@
+<!-- add_distributor.html -->
+{% extends 'admin_dashboard.html' %} {% block content %}
+<div class="container">
+  <h1 class="text-center my-4">Tambah Distributor</h1>
+  <form
+    action="{{ url_for('add_distributor') }}"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <!-- Tambahkan input untuk nama restoran, alamat, kontak, dan gambar -->
+    <div class="form-group">
+      <label for="nama_restoran">Nama Restoran:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nama_restoran"
+        name="nama_restoran"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="alamat">Alamat:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="alamat"
+        name="alamat"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="kontak">Kontak:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="kontak"
+        name="kontak"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="image">Gambar:</label>
+      <input
+        type="file"
+        class="form-control-file"
+        id="image"
+        name="image"
+        accept="image/*"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Simpan</button>
+  </form>
+</div>
+{% endblock %}

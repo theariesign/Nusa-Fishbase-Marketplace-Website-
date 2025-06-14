@@ -1,0 +1,49 @@
+{% extends 'admin_dashboard.html' %} {% block content %}
+<form
+  action="{{ url_for('add_blog') }}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" required />
+  </div>
+  <div class="form-group">
+    <label for="content">Isi Konten</label>
+    <textarea
+      class="form-control"
+      id="content"
+      name="content"
+      required
+      style="white-space: pre-line"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="published_date">Tanggal Di Terbitkan</label>
+    <input
+      type="date"
+      class="form-control"
+      id="published_date"
+      name="published_date"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="image">Masukan Gambar</label>
+    <input
+      type="file"
+      class="form-control-file"
+      id="image"
+      name="image"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Tambah Artikel</button>
+  <a
+    href="{{ url_for('manage_blog') }}"
+    class="btn btn-block"
+    style="background-color: grey"
+    >Kembali ke Blog</a
+  >
+</form>
+{% endblock %}

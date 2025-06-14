@@ -1,0 +1,25 @@
+{% extends "base_penjual.html" %}
+
+{% block content %}
+<h2>Pre Order</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Pembeli</th>
+            <th>Produk</th>
+            <th>Jumlah</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pre_order in pre_orders %}
+        <tr>
+            <td>{{ pre_order.buyer }}</td>
+            <td>{{ pre_order.product_name }}</td>
+            <td>{{ pre_order.quantity }}</td>
+            <td>{{ pre_order.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

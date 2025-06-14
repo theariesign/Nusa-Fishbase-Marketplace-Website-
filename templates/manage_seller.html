@@ -1,0 +1,31 @@
+{% extends 'admin_dashboard.html' %} {% block content %}
+<div class="card mb-4" id="manage-sellers-section">
+  <div class="card-header">Manage Sellers</div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for seller in unconfirmed_sellers %}
+        <tr>
+          <td>{{ seller.email }}</td>
+          <td>{{ seller.phone }}</td>
+          <td>
+            <a
+              href="{{ url_for('confirm_seller', user_id=seller._id) }}"
+              class="btn btn-success"
+              >Konfirmasi</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,185 @@
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tambah_produk.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="navbar">
+        <div class="navbar-logo">
+          <img src="/static/images/logo.png" alt="Logo" />
+        </div>
+      </div>
+      <ul>
+        <li>
+          <a href="{{ url_for('produk') }}">
+            <i class="fas fa-shopping-bag"></i> Produk
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('notifikasi') }}">
+            <i class="fas fa-bell"></i> Notifikasi
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('pesanan') }}">
+            <i class="fas fa-shopping-cart"></i> Pesanan
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('chat_pembeli', username='nama_pengguna') }}">
+            <i class="fas fa-comments"></i> Chat Pembeli
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('distributor') }}">
+            <i class="fas fa-users"></i> Channel Distributor
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('profil') }}">
+            <i class="fas fa-user"></i> Profil
+          </a>
+        </li>
+      </ul>
+      <div id="time-weather">
+        <div id="time"></div>
+        <div id="weather"></div>
+      </div>
+    </nav>
+    <script>
+      // Menampilkan waktu
+      function updateTime() {
+        var now = new Date();
+        var timeElement = document.getElementById("time");
+        timeElement.textContent = "Sekarang jam " + now.toLocaleTimeString();
+      }
+
+      // Menampilkan cuaca
+      function updateWeather() {
+        // Ganti dengan kunci API dari Visual Crossing
+        var apiKey = "C49CSH6PX9RK373PDKXJP5BR3";
+        var city = "BANTUL"; // Ganti dengan nama kota Anda
+        var apiUrl =
+          "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" +
+          city +
+          "?unitGroup=us&key=" +
+          apiKey +
+          "&contentType=json";
+
+        // Panggil API cuaca
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            var weatherElement = document.getElementById("weather");
+            weatherElement.textContent =
+              "Cuaca saat ini: " + data.currentConditions.icon;
+          })
+          .catch((error) => {
+            console.error("Gagal memuat data cuaca:", error);
+          });
+      }
+
+      // Panggil fungsi-fungsi untuk mengupdate waktu dan cuaca
+      updateTime();
+      updateWeather();
+
+      // Perbarui waktu setiap detik
+      setInterval(updateTime, 1000);
+    </script>
+
+    <div class="container">
+      <h2>Tambah Produk Baru</h2>
+      <form
+        action="submit_produk.php"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <h3>Tambah Foto:</h3>
+        <button type="button" class="image-upload" onclick="addImageInput()">
+          <img id="image-preview" src="" alt="Preview" style="display: none" />
+        </button>
+        <div class="form-group">
+          <label for="nama">Nama Produk:</label>
+          <input type="text" id="nama" name="nama" required />
+        </div>
+        <div class="form-group">
+          <label for="deskripsi">Deskripsi Produk:</label>
+          <textarea
+            id="deskripsi"
+            name="deskripsi"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="berat">Berat Produk (kg/gram):</label>
+          <input type="number" id="berat" name="berat" min="0" required />
+        </div>
+        <div class="form-group">
+          <label for="stok">Stok Produk:</label>
+          <input type="number" id="stok" name="stok" min="0" required />
+        </div>
+        <div class="form-group">
+          <label for="variasi">Variasi:</label>
+          <select id="kategori" name="kategori" required>
+            <option value="">Pilih Variasi</option>
+            <option value="Elektronik">Segar</option>
+            <option value="Pakaian">Beku</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="harga">Harga Produk:</label>
+          <input type="number" id="harga" name="harga" min="0" required />
+        </div>
+        <div class="form-group">
+          <label for="kategori">Kategori:</label>
+          <select id="kategori" name="kategori" required>
+            <option value="">Pilih Kategori</option>
+            <option value="Elektronik">Ikan Laut</option>
+            <option value="Pakaian">Udang</option>
+            <option value="Makanan">Kerang</option>
+            <!-- Tambahkan opsi kategori lainnya sesuai kebutuhan -->
+          </select>
+        </div>
+        <button type="submit">Tampilkan Produk</button>
+      </form>
+    </div>
+    <script>
+      function addImageInput() {
+        var input = document.createElement("input");
+        input.type = "file";
+        input.name = "foto[]";
+        input.accept = "image/*";
+        input.required = true;
+        input.multiple = true;
+        input.addEventListener("change", function () {
+          previewImages(this);
+        });
+
+        input.click(); // Automatically trigger the file input when the button is clicked
+      }
+
+      function previewImages(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (event) {
+            var imgPreview = document.getElementById("image-preview");
+            imgPreview.src = event.target.result;
+            imgPreview.style.display = "block";
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .header {
+    position: relative;
+    background-color: #007498;
+    height: 200px;
+    border-bottom-left-radius: 50% 100px;
+    border-bottom-right-radius: 50% 100px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -25px;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: 3em;
+  }
+
+  .header p {
+    font-size: 1.2em;
+  }
+
+  footer {
+    background-color: #007498;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer .footer-content div {
+    flex: 1;
+    margin: 10px;
+  }
+
+  footer .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+  }
+
+  footer .social-icons img:hover {
+    transform: scale(1.2);
+  }
+</style>
+<div class="header">
+  <h1>Etalase Produk</h1>
+  <p>Produk ini adalah produk rekomendasi dari Nusa Fishbase Marketplace.</p>
+</div>
+<div class="container mt-4">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-3 mb-4">
+      <div class="card h-100 shadow">
+        <img
+          src="{{ url_for('static', filename='images/konten/' + product.image) }}"
+          class="card-img-top"
+          alt="{{ product.name }}"
+          style="width: 100%; height: 200px"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <!-- Hanya menampilkan 20 karakter dari deskripsi -->
+          <p class="card-text">
+            {{ product.description[:50] }}{% if product.description|length > 20
+            %} .....{% endif %}
+          </p>
+        </div>
+        <div
+          class="card-footer bg-transparent d-flex justify-content-between align-items-center"
+        >
+          <p class="card-text">Harga : Rp{{ product.price }}/kg</p>
+          <button
+            class="btn btn-primary favorite-btn"
+            data-product-id="{{ product._id }}"
+          >
+            Favorit
+          </button>
+        </div>
+        <!-- Bagian tambahan untuk tautan "Baca Selengkapnya" -->
+        <div
+          class="card-footer bg-transparent d-flex justify-content-center align-items-center"
+        >
+          <!-- Menggunakan justify-content-center untuk membuatnya di tengah -->
+          <a
+            href="{{ url_for('detail_produk', product_id=product._id) }}"
+            class="btn btn-link"
+            >Lihat Lebih Detail</a
+          >
+        </div>
+        <!-- Akhir bagian tambahan -->
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div>
+      <h3>Nusa Fishbase</h3>
+      <p>Menyediakan informasi lengkap mengenai pasar ikan di Indonesia.</p>
+    </div>
+    <div>
+      <h3>Ikuti Kami</h3>
+      <div class="social-icons">
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png"
+            alt="Facebook"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
+            alt="Instagram"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png"
+            alt="Twitter"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+            alt="LinkedIn"
+        /></a>
+      </div>
+    </div>
+    <div>
+      <h3>Kontak</h3>
+      <p>Email: info@nusafishbase.com</p>
+      <p>Telepon: (+62) 123-456-789</p>
+    </div>
+  </div>
+  <p>&copy; 2024 Nusa Fishbase. All Rights Reserved.</p>
+</footer>
+
+<script>
+  function showLoginPopup() {
+    Swal.fire({
+      title: "Login Terlebih Dahulu",
+      text: "Mohon untuk login, agar bisa melakukan favorit produk",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Login",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/login";
+      }
+    });
+  }
+
+  $(document).on("click", ".favorite-btn", function () {
+    var productId = $(this).data("product-id");
+    var productCard = $(this).closest(".card");
+    var productData = {
+      product_id: productId,
+      image: productCard.find("img").attr("src").split("/").pop(),
+      name: productCard.find(".card-title").text(),
+      description: productCard
+        .find(".card-text")
+        .first()
+        .text()
+        .replace(" .....", ""),
+      price: productCard
+        .find(".card-text")
+        .last()
+        .text()
+        .replace("Harga : Rp.", ""),
+    };
+
+    // Check if the user is logged in using fetch
+    fetch("/check_login")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Login status:", data);
+        if (data.logged_in) {
+          // If user is logged in, proceed to add product to favorites
+          $.ajax({
+            url: "/add_to_favorites",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(productData),
+            success: function (response) {
+              if (response.success) {
+                Swal.fire({
+                  title: "Sukses",
+                  text: "Produk Anda berhasil ditambahkan ke favorit.",
+                  icon: "success",
+                });
+              } else {
+                alert(response.message);
+              }
+            },
+            error: function () {
+              Swal.fire({
+                title: "Gagal",
+                text: "Produk Anda gagal ditambahkan ke favorit.",
+                icon: "error",
+              });
+            },
+          });
+        } else {
+          // If user is not logged in, show login popup
+          showLoginPopup();
+        }
+      })
+      .catch((error) => {
+        console.error("Error checking login status:", error);
+        Swal.fire({
+          title: "Gagal",
+          text: "Terjadi kesalahan saat memeriksa status login.",
+          icon: "error",
+        });
+      });
+  });
+</script>
+{% endblock %}

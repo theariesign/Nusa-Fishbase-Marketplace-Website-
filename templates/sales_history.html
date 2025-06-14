@@ -1,0 +1,39 @@
+{% extends "base_penjual.html" %} {% block content %}
+<style>
+  .header {
+    background-color: #e6f2ff; /* Warna biru muda */
+    text-align: center; /* Posisi teks di tengah */
+    padding: 20px; /* Berikan padding untuk ruang di sekitar teks */
+  }
+
+  .header h1 {
+    margin: 0; /* Hapus margin bawaan */
+  }
+</style>
+
+<div class="header">
+  <h1>Riwayat Penjualan</h2>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Pembeli</th>
+      <th>Produk</th>
+      <th>Jumlah</th>
+      <th>Status</th>
+      <th>Tanggal</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sale in sales %}
+    <tr>
+      <td>{{ sale.buyer }}</td>
+      <td>{{ sale.product_name }}</td>
+      <td>{{ sale.quantity }}</td>
+      <td>{{ sale.status }}</td>
+      <td>{{ sale.date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

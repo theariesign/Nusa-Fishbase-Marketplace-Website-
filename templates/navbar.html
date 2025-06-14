@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nusa Fishbase Marketplace</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/ionicons.css">
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body{
+        padding-top: 265px;
+      }
+
+      .animasi-teks {
+        overflow: hidden; /* Mengatur overflow agar teks yang melebihi lebar tidak ditampilkan */
+        white-space: nowrap; /* Mencegah teks berjalan ke baris baru */
+      }
+
+      .animasi-teks span {
+        display: inline-block; /* Mengatur teks agar dapat berjalan */
+        animation: berjalan 10s linear infinite; /* Menggunakan animasi berjalan */
+      }
+
+      @keyframes berjalan {
+        0% {
+          transform: translateX(
+            100%
+          ); /* Mulai dari posisi di luar layar sebelah kanan */
+        }
+        100% {
+          transform: translateX(
+            -100%
+          ); /* Selesai di posisi di luar layar sebelah kiri */
+        }
+      }
+
+      /* Mengatur ukuran modal */
+      .modal-dialog {
+        max-width: 400px;
+      }
+
+      .select-role {
+        cursor: pointer;
+      }
+
+      .modal-dialog {
+        position: absolute;
+        top: 15%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* Jarak dari atas */
+      .modal-header {
+        padding-top: 20px; /* Sesuaikan dengan kebutuhan Anda */
+      }
+
+      /* Mengatur warna latar belakang dan teks di dalam modal */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 150%; /* Could be more or less, depending on screen size */
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      }
+
+
+      /* Mengatur judul modal */
+      .modal-title {
+        font-weight: bold;
+        color: #007498;
+      }
+
+      /* Mengatur formulir di dalam modal */
+      .modal-body form {
+        margin-top: 20px;
+      }
+
+      /* Mengatur label dan input dalam formulir */
+      .modal-body form label {
+        font-weight: bold;
+      }
+
+      .dropdown-item:hover,
+        .dropdown-item:focus,
+        .dropdown-item:active {
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+        }
+
+      .modal-body form input[type="email"],
+      .modal-body form input[type="text"],
+      .modal-body form input[type="password"],
+      .modal-body form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      /* Mengatur tombol Registrasi */
+      .modal-body form button[type="submit"] {
+        background-color: #007498;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      /* Mengatur tombol Registrasi saat digerakkan */
+      .modal-body form button[type="submit"]:hover {
+        background-color: #00506b;
+      }
+
+      .kategori-produk {
+        margin-right: 10px; /* Mengatur jarak antar tombol */
+        background-color: #fff; /* Warna latar belakang */
+        color: #007498; /* Warna teks */
+        border: none; /* Menghilangkan border */
+      }
+
+      .kategori-produk:hover {
+        background-color: #d9d9d9; /* Warna latar belakang saat hover */
+        color: #000; /* Warna teks saat hover */
+      }
+
+      .kategori-produk:focus {
+        box-shadow: none; /* Menghilangkan efek focus default */
+      }
+
+      .kategori-produk:active {
+        background-color: #b3b3b3; /* Warna latar belakang saat tombol ditekan */
+        color: #000; /* Warna teks saat tombol ditekan */
+        border-bottom: 2px solid #000; /* Garis bawah saat tombol ditekan */
+      }
+
+      .nav-link {
+        padding: 10px 15px; /* Padding untuk link navigasi */
+      }
+
+      .call-center {
+        position: relative;
+    }
+    
+    .call-center-button {
+        display: flex;
+        align-items: center;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 30px;
+        font-size: 16px;
+        box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .call-center-button ion-icon {
+        font-size: 24px;
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .call-center-button:hover {
+      background-color: #0056b3;
+      box-shadow: 0 12px 20px rgba(0, 123, 255, 0.4);
+  }
+  
+  .call-center-button:hover ion-icon {
+      transform: scale(1.2);
+  }
+  
+  .call-center-button:active {
+      transform: scale(0.95);
+  }
+  
+  .call-center-button span {
+      display: inline-block;
+      animation: typing 2s steps(22) infinite;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid;
+  }
+  
+  
+  @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+  }
+    
+      
+      #chatModal {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px; /* Sesuaikan lebar modal sesuai kebutuhan */
+        height: 300px;
+        overflow: hidden; /* Agar border tidak terlihat di luar kotak */
+      }
+      
+      /* Style untuk header modal */
+      #chatModal h2 {
+        margin: 0;
+        padding: 15px;
+        background-color: transparent;
+        color: #007bff;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        cursor: grab; /* Mengubah kursor menjadi grab saat menggeser */
+      }      
+      
+      /* Style untuk isi modal */
+      #chatModal .modal-content {
+        padding: 25px;
+      }
+      
+      /* Style untuk kotak obrolan */
+      #chatBox {
+        max-height: 300px; /* Batasi tinggi kotak obrolan agar dapat di-scroll */
+        overflow-y: auto;
+        padding: 10px;
+      }
+      
+      /* Style untuk pesan pengguna */
+      .user-message {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin-bottom: 5px;
+        max-width: 70%;
+        word-wrap: break-word; /* Mengatur agar teks terpotong saat panjang */
+        float: right;
+      }
+      
+      /* Style untuk respon AI */
+      .ai-response {
+        background-color: #f0f0f0;
+        color: #333;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin-bottom: 5px;
+        max-width: 70%;
+        word-wrap: break-word;
+        float: left;
+      }
+      
+      #tanggal-waktu {
+        position: fixed;
+        left: calc(50% - 100px); /* Menyesuaikan dengan lebar elemen */
+        top: 20px; /* Sesuaikan dengan posisi vertikal yang diinginkan */
+        text-align: center; /* Untuk membuat teks menjadi posisi tengah */
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+      }            
+
+      /* Style untuk input pesan */
+      #chatInput {
+        width: calc(100% - 80px); /* Mengatur lebar input pesan dengan memperhitungkan lebar tombol kirim */
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+      }
+      
+      /* Style untuk tombol kirim */
+      #sendButton {
+        width: 70px;
+        padding: 10px;
+        border-radius: 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 30px;
+      }
+      
+      /* Style untuk tombol tutup */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+      }
+      
+      /* Style untuk tampilan ketika modal di-drag */
+      #chatModal.dragging {
+        opacity: 0.5; /* Mengurangi opasitas modal ketika di-drag */
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        z-index: 99999; /* Adjust the value as needed */
+      }
+
+      #hapusAkunBtn {
+        cursor: pointer;
+      }      
+    </style>
+  </head>
+  <body>
+    <!-- Uppertext -->
+    <div class="container-fluid p-0 fixed-top" style="background-color: #007498; font-family: 'Spinnaker', sans-serif;">
+      <div
+        class="d-flex justify-content-between align-items-center"
+        style="color: white"
+      >
+        <div
+          class="container-fluid p-0"
+          style="
+            background-color: #007498;
+            margin-bottom: 0;
+            font-family: 'Spinnaker', sans-serif;
+          "
+        >
+          <div
+            class="d-flex justify-content-between align-items-center"
+            style="color: white"
+          >
+            <div class="text-start animasi-teks">
+              <span>Selamat Datang di Nusa Fishbase Marketplace</span>
+            </div>
+            <div
+              class="text-end"
+              id="tanggal-waktu"
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin-right: 550px;
+                color: white;
+                font-size: 16px;
+              "
+            ></div>
+          </div>
+        </div>
+        <div class="call-center">
+          <button id="callCenterButton" class="call-center-button">
+              <ion-icon name="call-outline"></ion-icon>
+              <span>Call Center: 088893</span>
+          </button>
+        </div>  
+      </div>
+    </div>
+
+    <!-- Navbar1 -->
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #007498; margin-top: 45px; font-family: 'Spinnaker', sans-serif;">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <img
+          src="{{ url_for('static', filename='images/Logo/logo_transparan_nfb.png') }}"
+          alt="Logo NFB"
+          class="me-2"
+          style="width: 10%; margin-right: 100px; margin-left: 50px"
+        />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container mt-5 mb-5">
+          <form id="searchForm" class="d-flex" style="margin-left: 140px; margin-right: 100px;" method="GET" action="/search_results">
+              <input
+                  id="searchInput"
+                  name="query"
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  style="width: 700px; background-color: #fff; color: black;"
+              />
+              <button
+                  id="searchButton"
+                  class="btn btn-outline-success me-2"
+                  type="submit"
+                  style="background-color: #d9d9d9; color: black;"
+              >
+                  Search
+              </button>
+          </form>
+      </div>      
+        <div style="margin-right: 170px; margin-left: -20px">
+          <!-- Menambahkan style untuk ikon keranjang -->
+          <a href="{{ url_for('cart') }}">
+            <ion-icon
+                name="cart-outline"
+                style="font-size: 40px; color: white"
+            ></ion-icon>
+          </a>
+        </div>
+        <div class="d-flex justify-content-between" style="margin-right: 100px; margin-left: -90px">
+          {% if 'logged_in' in session %}
+            <div class="d-flex align-items-center">
+              <p class="me-3" style="color: white; margin-right: 10px; margin-left: -10px">Halo! {{ session['email'] }}</p>
+              <div class="dropdown">
+                <button class="btn btn-primary mb-3 dropdown-toggle" style="background-color: #d9d9d9; color: black; width: 100%;" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-user me-2"></i> Profile
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="{{ url_for('edit_profile_pembeli') }}">Edit Profile</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('logout') }}">Keluar Akun</a></li>
+                  <li><a class="dropdown-item" id="hapusAkunBtn">Hapus Akun</a></li>
+                </ul>
+              </div>
+            </div>
+            {% else %}
+            <button
+              type="button"
+              id="registerButton"
+              class="btn btn-primary mb-3"
+              style="background-color: #d9d9d9; color: black; width: 100%; margin-right: 17px"
+              onclick="window.location.href='{{ url_for('registrasi') }}';"
+            >
+              Daftar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary mb-3"
+              style="background-color: #d9d9d9; color: black; width: 100%; margin-right: 17px"
+              onclick="window.location.href='{{ url_for('login') }}';"
+            >
+              Login
+            </button>
+          {% endif %}
+        </div>  
+      </div>
+    </nav>
+
+    <!-- Navbar2 -->
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #d3d3d3; margin-top: 203px; font-family: 'Spinnaker', sans-serif; width: 100%; z-index: 2">
+      <div class="container-fluid">
+          <div class="d-flex justify-content-between align-items-center" style="width: 100%">
+            <div class="nav-item dropdown">
+              <button class="btn kategori-produk dropdown-toggle" type="button" id="kategoriDropdown" data-bs-toggle="dropdown" aria-expanded="false">Kategori Produk</button>
+              <ul class="dropdown-menu" aria-labelledby="kategoriDropdown" id="kategoriDropdownMenu">
+                <li><a class="dropdown-item" href="#" onclick="filterProduct('ikan')">Ikan</a></li>
+                <li><a class="dropdown-item" href="#" onclick="filterProduct('udang')">Udang</a></li>
+                <li><a class="dropdown-item" href="#" onclick="filterProduct('kepiting')">Kepiting</a></li>
+                <li><a class="dropdown-item" href="#" onclick="filterProduct('lobster')">Lobster</a></li>
+                <li><a class="dropdown-item" href="#" onclick="filterProduct('kerang')">Kerang</a></li>
+                <!-- Pastikan sintaks Jinja2 dirender dengan benar -->
+                {% for category in categories %}
+                  <li><a class="dropdown-item" href="#" onclick="filterProduct('{{ category.name }}')">{{ category.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          
+
+        <!-- Collapse navbar -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" Style="margin-left:20px">
+          <div class="navbar-nav">
+            <!-- Link navigasi -->
+            <a
+              class="nav-link {{ 'active' if request.endpoint == 'home' else '' }}"
+              href="{{ url_for('home') }}"
+              >Beranda</a
+            >
+            <a class="nav-link {{ 'active' if request.endpoint == 'riwayat_pembelian' else '' }}" 
+            href="{{ url_for('riwayat_pembelian') }}"
+            >Riwayat Pembelian
+            </a>
+            <a
+              class="nav-link {{ 'active' if request.endpoint == 'favorit' else '' }}"
+              href="{{ url_for('favorit') }}"
+              >Favorit</a
+            >
+            <a
+              class="nav-link {{ 'active' if request.endpoint == 'blog' else '' }}"
+              href="{{ url_for('blog') }}"
+              >Blog</a
+            >
+            <a
+              class="nav-link {{ 'active' if request.endpoint == 'kontak_kami' else '' }}"
+              href="{{ url_for('kontak_kami') }}"
+              >Kontak Kami</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Modal for AI Chat -->
+    <div id="chatModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Call Center</h2>
+        <div id="chatBox" class="chat-box"></div>
+        <input type="text" id="chatInput" placeholder="Type your message..." />
+        <button id="sendButton">Send</button>
+      </div>
+    </div>
+
+    <div id="product-list" class="container mt-4">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-QT/lvlZj6IIvge6pfPbBrXgzr5LHD1/RYxCqUE2ib5jjq/7Bqufl6yY5dGVEFoKf" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+          function filterProduct(categoryName) {
+          $.ajax({
+              url: `/filter_products/${categoryName}`,
+              type: 'GET',
+              success: function(response) {
+                  $('#product-list').html(response);
+              },
+              error: function() {
+                  alert('Failed to filter products.');
+              }
+          });
+      }
+    </script>
+    <script>
+      function filterProduct(category) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/kategori/" + encodeURIComponent(category), true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var products = JSON.parse(xhr.responseText);
+            displayProducts(products);
+          }
+        };
+        xhr.send();
+      }
+      
+      function displayProducts(products) {
+        var productList = document.getElementById("kategoriResults");
+        productList.innerHTML = ""; // Membersihkan konten sebelumnya
+      
+        if (products.length > 0) {
+          // Jika produk ditemukan, tampilkan produk
+          products.forEach(function (product) {
+            var productDiv = document.createElement("div");
+            productDiv.className = "kategoriResults";
+            productDiv.innerHTML = `
+              <div class="card mb-3 border shadow">
+                <div class="row g-0">
+                  <div class="col-md-6">
+                      <img
+                        src="${product.image}"
+                        class="img-fluid rounded-start img-square"
+                        alt="${product.name}"
+                        style="width: 100%; height: 100%; object-fit: cover"
+                      />
+                    </a>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">${product.name}</h5>
+                      <p class="card-text">${product.description}</p>
+                      <p class="card-text">Harga : Rp.${product.price}</p>
+                      <p class="card-text">Stock: ${product.stock}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+            productList.appendChild(productDiv);
+          });
+        } else {
+          // Jika tidak ada produk ditemukan, tampilkan pesan
+          productList.innerHTML = `<p style="font-size: 25px; text-align: center; margin-bottom: 60px">
+            Tidak ada produk yang ditemukan untuk kategori ini.
+          </p>`;
+        }
+      }          
+    </script>
+    <script>
+      $(document).ready(function() {
+        // Mengatur event click pada tombol keranjang
+        $('a[href="{{ url_for('cart') }}"]').click(function(event) {
+            event.preventDefault(); // Menghentikan perilaku default dari link
+        
+            // Lakukan permintaan AJAX untuk memeriksa apakah pengguna sudah login
+            $.ajax({
+                url: "{{ url_for('check_login') }}",
+                type: "GET",
+                success: function(response) {
+                    // Jika pengguna sudah login, arahkan ke halaman keranjang
+                    if (response.logged_in) {
+                        window.location.href = "{{ url_for('cart') }}";
+                    } else {
+                        // Jika pengguna belum login, tampilkan pesan dan arahkan ke halaman login
+                        Swal.fire({
+                            title: 'Login Terlebih Dahulu',
+                            text: 'Mohon untuk login, agar bisa mengakses keranjang.',
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonText: 'Login',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/login";
+                            }
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    // Jika terjadi kesalahan saat melakukan permintaan AJAX, tampilkan pesan kesalahan
+                    Swal.fire('Error', 'Something went wrong. Please try again.', 'error');
+                }
+            });
+        });
+    });             
+    </script>
+    <script>
+      $(document).ready(function() {
+        // Mengatur event click pada tautan "Riwayat Pesanan"
+        $('#riwayatPesananLink').click(function(event) {
+            event.preventDefault(); // Mencegah aksi default dari tautan
+            
+            // Cek apakah pengguna sudah login
+            $.ajax({
+                url: "{{ url_for('check_login') }}",
+                type: "GET",
+                success: function(response) {
+                    // Jika pengguna sudah login, arahkan langsung ke halaman riwayat pesanan
+                    if (response.logged_in) {
+                        window.location.href = "{{ url_for('riwayat_pembelian') }}";
+                    } else {
+                        // Jika pengguna belum login, tampilkan pop-up login
+                        $('#loginModal').modal('show');
+                    }
+                },
+                error: function(xhr) {
+                    // Jika terjadi kesalahan, tampilkan pesan kesalahan
+                    console.error("Error:", xhr.statusText);
+                    // Di sini Anda dapat menampilkan pesan kesalahan jika perlu
+                }
+            });
+        });
+    });    
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#registerButton').click(function() {
+            $('#registrationModal').modal('show');
+        });
+    
+        $('#registrationForm').submit(function(event) {
+            event.preventDefault();
+    
+            var email = $('#registerEmail').val();
+            var password = $('#registerPassword').val();
+    
+            $.ajax({
+                url: "/register",
+                type: "POST",
+                data: { email: email, password: password },
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = response.redirect;
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });    
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const callCenterButton = document.getElementById("callCenterButton");
+        const chatModal = document.getElementById("chatModal");
+        const closeModal = document.getElementsByClassName("close")[0];
+        const sendButton = document.getElementById("sendButton");
+        const chatInput = document.getElementById("chatInput");
+        const chatBox = document.getElementById("chatBox");
+    
+        // Fungsi untuk membuka modal chat
+        function openChatModal() {
+            chatModal.style.display = "block";
+        }
+    
+        // Fungsi untuk menutup modal chat
+        function closeChatModal() {
+            chatModal.style.display = "none";
+        }
+    
+        // Ketika tombol "Chat with AI Call Center" diklik, buka modal chat
+        callCenterButton.onclick = function() {
+            openChatModal();
+        }
+    
+        // Ketika tombol tutup di modal chat diklik, tutup modal chat
+        closeModal.onclick = function() {
+            closeChatModal();
+        }
+    
+        // Ketika pengguna mengklik di luar modal chat, tutup modal chat
+        window.onclick = function(event) {
+            if (event.target === chatModal) {
+                closeChatModal();
+            }
+        }
+    
+        // Ketika tombol "Send" diklik, kirim pesan
+        sendButton.onclick = function() {
+            const userMessage = chatInput.value;
+            if (userMessage.trim() === "") return;
+    
+            const userMessageElement = document.createElement("div");
+            userMessageElement.className = "user-message";
+            userMessageElement.textContent = userMessage;
+            chatBox.appendChild(userMessageElement);
+    
+            chatInput.value = "";
+    
+            // Simulasi respon AI
+            setTimeout(() => {
+                const aiResponseElement = document.createElement("div");
+                aiResponseElement.className = "ai-response";
+                aiResponseElement.textContent = "This is an AI response to: " + userMessage;
+                chatBox.appendChild(aiResponseElement);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+    });
+
+    var modal = document.getElementById('chatModal');
+
+    // Variabel untuk menyimpan posisi awal mouse saat drag dimulai
+var initialX;
+var initialY;
+
+// Fungsi untuk menangani event saat drag dimulai
+function dragStart(e) {
+  initialX = e.clientX;
+  initialY = e.clientY;
+
+  // Tambahkan class "dragging" ke modal
+  modal.classList.add('dragging');
+
+  // Tambahkan event listener untuk event mousemove
+  document.addEventListener('mousemove', dragMove);
+}
+
+// Fungsi untuk menangani event saat drag berlangsung
+function dragMove(e) {
+  // Hitung perbedaan posisi mouse dari posisi awal
+  var dx = e.clientX - initialX;
+  var dy = e.clientY - initialY;
+
+  // Atur posisi modal sesuai perbedaan posisi mouse
+  modal.style.left = modal.offsetLeft + dx + 'px';
+  modal.style.top = modal.offsetTop + dy + 'px';
+
+  // Perbarui posisi awal mouse
+  initialX = e.clientX;
+  initialY = e.clientY;
+}
+
+// Fungsi untuk menangani event saat drag berakhir
+function dragEnd() {
+  // Hapus class "dragging" dari modal
+  modal.classList.remove('dragging');
+
+  // Hapus event listener untuk event mousemove
+  document.removeEventListener('mousemove', dragMove);
+}
+
+// Tambahkan event listener untuk event mousedown pada modal
+modal.addEventListener('mousedown', dragStart);
+
+// Tambahkan event listener untuk event mouseup pada dokumen
+document.addEventListener('mouseup', dragEnd);
+    </script>
+    <script>
+      // Fungsi untuk mendapatkan waktu saat ini dan memperbarui elemen HTML
+      function updateClock() {
+        var now = new Date();
+        var hari = now.toLocaleDateString("id-ID", { weekday: "long" });
+        var tanggal = now.getDate();
+        var bulan = now.toLocaleDateString("id-ID", { month: "long" });
+        var tahun = now.getFullYear();
+        var jam = now.getHours();
+        var menit = now.getMinutes();
+        var detik = now.getSeconds();
+
+        // Mengonversi jam, menit, dan detik menjadi format 2 digit
+        jam = ("0" + jam).slice(-2);
+        menit = ("0" + menit).slice(-2);
+        detik = ("0" + detik).slice(-2);
+
+        // Mengupdate elemen HTML dengan waktu yang diperoleh
+        document.getElementById("tanggal-waktu").innerHTML =
+          hari +
+          ", " +
+          tanggal +
+          " " +
+          bulan +
+          " " +
+          tahun +
+          " " +
+          jam +
+          ":" +
+          menit +
+          ":" +
+          detik;
+      }
+
+      // Memperbarui jam setiap detik
+      setInterval(updateClock, 1000);
+
+      // Memanggil fungsi updateClock untuk pertama kali
+      updateClock();
+      </script>
+      <script>
+        $(document).ready(function () {
+          $("#searchButton").click(function () {
+            var query = $("#searchInput").val();
+      
+            $.ajax({
+              type: "GET",
+              url: "/search_product",
+              data: { query: query },
+              success: function (response) {
+                var resultsContainer = $("#searchResults");
+                resultsContainer.empty();
+      
+                if (response.length > 0) {
+                  response.forEach(function (product) {
+                    var productHTML = `
+                      <div class="card mb-3">
+                        <div class="row g-0">
+                          <div class="col-md-4">
+                            <img src="${product.image}" class="img-fluid rounded-start" alt="${product.name}">
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title">${product.name}</h5>
+                              <p class="card-text">${product.description}</p>
+                              <p class="card-text"><small class="text-muted">Price: ${product.price}</small></p>
+                              <p class="card-text"><small class="text-muted">Stock: ${product.stock}</small></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                    resultsContainer.append(productHTML);
+                  });
+                } else {
+                  resultsContainer.append("<p>No products found.</p>");
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                $("#searchResults").html("<p>An error occurred while searching for products.</p>");
+              },
+            });
+          });
+        });
+      </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          document.getElementById('hapusAkunBtn').addEventListener('click', function () {
+              Swal.fire({
+                  title: 'Konfirmasi Hapus Akun',
+                  text: 'Apakah Anda yakin ingin menghapus akun Anda secara permanen?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#d33',
+                  cancelButtonColor: '#3085d6',
+                  confirmButtonText: 'Hapus Akun',
+                  cancelButtonText: 'Batal'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      fetch('/delete_account', {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({})
+                      }).then(response => {
+                          return response.json().then(data => {
+                              if (response.ok) {
+                                  Swal.fire({
+                                      title: 'Akun Berhasil Dihapus',
+                                      icon: 'success',
+                                      showConfirmButton: true,
+                                      timer: 3000 // Durasi tampilan popup (ms)
+                                  }).then((result) => {
+                                      if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                          window.location.href = '/login';
+                                      }
+                                  });
+                              } else {
+                                  Swal.fire('Gagal Menghapus Akun', data.error || 'Silakan coba lagi nanti', 'error');
+                              }
+                          });
+                      }).catch(error => {
+                          Swal.fire('Error', 'Terjadi kesalahan. Silakan coba lagi nanti.', 'error');
+                      });
+                  }
+              });
+          });
+      });      
+      </script>
+      <script>
+        // Fungsi untuk mengarahkan pengguna ke halaman kategori berdasarkan kategori yang dipilih
+        function redirectToCategory(category) {
+          window.location.href = `/kategori/${category}`;
+      }
+
+      // JavaScript untuk memuat dan menampilkan produk berdasarkan kategori yang dipilih
+      document.addEventListener('DOMContentLoaded', function () {
+          const category = window.location.pathname.split('/').pop(); // Mendapatkan kategori dari URL
+
+          // Memuat produk berdasarkan kategori
+          fetch(`/get_products?category=${category}`)
+              .then(response => response.json())
+              .then(data => {
+                  const productsContainer = document.getElementById('productsContainer'); // Mendapatkan kontainer produk
+                  productsContainer.innerHTML = ''; // Bersihkan kontainer produk
+
+                  // Loop melalui data produk dan menampilkan masing-masing produk
+                  data.forEach(product => {
+                      // Membuat elemen untuk menampilkan produk
+                      const productElement = document.createElement('div');
+                      productElement.innerHTML = `
+                          <div class="card">
+                              <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                              <div class="card-body">
+                                  <h5 class="card-title">${product.name}</h5>
+                                  <p class="card-text">Price: ${product.price}</p>
+                                  <a href="/product/${product.id}" class="btn btn-primary">View Product</a>
+                              </div>
+                          </div>
+                      `;
+                      // Menambahkan elemen produk ke kontainer produk
+                      productsContainer.appendChild(productElement);
+                  });
+              })
+              .catch(error => {
+                  console.error('Error fetching products:', error);
+              });
+      });
+      </script>
+  </body>
+</html>

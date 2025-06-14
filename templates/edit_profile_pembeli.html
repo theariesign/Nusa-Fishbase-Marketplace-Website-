@@ -1,0 +1,237 @@
+{% extends 'base.html' %} {% block title %}Edit Profil Pembeli{% endblock %} {%
+block content %}
+<link
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<style>
+  body,
+  html {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    position: relative;
+    margin-top: 0; /* Adjust based on your navbar height */
+    background: url("{{ url_for('static', filename='images/konten/orang2.jpg') }}")
+      no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .background-animate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .card {
+    z-index: 1;
+    position: relative;
+    background-color: #e0e0e0; /* Warna abu-abu untuk form */
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    margin-top: 80px; /* Tambahkan margin-top agar tidak menabrak navigasi */
+  }
+
+  .form-control {
+    border-radius: 5px;
+    background-color: #f8f9fa; /* Warna abu-abu terang */
+  }
+
+  .form-label {
+    font-weight: bold;
+  }
+
+  .header {
+    position: relative;
+    background-color: #007498;
+    height: 200px;
+    border-bottom-left-radius: 50% 100px;
+    border-bottom-right-radius: 50% 100px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -7px;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: 3em;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  footer {
+    background-color: #007498;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer .footer-content div {
+    flex: 1;
+    margin: 10px;
+  }
+
+  footer .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+  }
+
+  footer .social-icons img:hover {
+    transform: scale(1.2);
+  }
+</style>
+<div class="header">
+  <h1>Edit Profil Pembeli</h1>
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form method="POST">
+            <div class="form-group mb-3">
+              <label for="name" class="form-label">Nama</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                value="{{ user['name'] }}"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                value="{{ user['email'] }}"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="phone" class="form-label">Telepon</label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                class="form-control"
+                value="{{ user['phone'] }}"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="address" class="form-label">Alamat</label>
+              <textarea
+                id="address"
+                name="address"
+                class="form-control"
+                rows="4"
+                required
+              >
+{{ user['address'] }}</textarea
+              >
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Simpan</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div>
+      <h3>Nusa Fishbase</h3>
+      <p>Menyediakan informasi lengkap mengenai pasar ikan di Indonesia.</p>
+    </div>
+    <div>
+      <h3>Ikuti Kami</h3>
+      <div class="social-icons">
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png"
+            alt="Facebook"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
+            alt="Instagram"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png"
+            alt="Twitter"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+            alt="LinkedIn"
+        /></a>
+      </div>
+    </div>
+    <div>
+      <h3>Kontak</h3>
+      <p>Email: info@nusafishbase.com</p>
+      <p>Telepon: (+62) 123-456-789</p>
+    </div>
+  </div>
+  <p>&copy; 2024 Nusa Fishbase. All Rights Reserved.</p>
+</footer>
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+  integrity="sha384-IQsoLXl5PILFyDVYKJvM7F+CpPE1FELjgQl6q6d/b4K6pRHE6tz3QpCg3PaPwMdx"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  integrity="sha384-B4gt1jrGC7Jh4AgZ6aX5fA23mF3rtaetKzhxTqBNQ+2eG5I1zLg2Lp6A7jLEUANg"
+  crossorigin="anonymous"
+></script>
+{% endblock %}

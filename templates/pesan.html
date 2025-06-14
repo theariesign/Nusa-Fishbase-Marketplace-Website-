@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Live Chat</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/pesan.css') }}"
+    />
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-box" id="chat-box">
+        <!-- Chat messages will be displayed here -->
+      </div>
+      <input
+        type="text"
+        id="message-input"
+        placeholder="Type your message..."
+      />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+      function sendMessage() {
+        var messageInput = document.getElementById("message-input");
+        var message = messageInput.value.trim();
+
+        if (message !== "") {
+          var chatBox = document.getElementById("chat-box");
+          var messageElement = document.createElement("div");
+          messageElement.textContent = message;
+          chatBox.appendChild(messageElement);
+
+          // Clear the message input
+          messageInput.value = "";
+
+          // Scroll to the bottom of the chat box
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      }
+    </script>
+  </body>
+</html>

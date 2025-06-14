@@ -1,0 +1,157 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2599c4;
+  color: white;
+  padding: 10px;
+  height: 80px; /* Adjust height as needed */
+}
+
+.navbar-logo img {
+  height: 290px; /* Adjust height as needed */
+  margin-right: 10px;
+  margin-top: 40px;
+}
+
+.navbar-actions button {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 350px;
+  background-color: #2599c4;
+  padding-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin-top: 55px;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.sidebar ul li {
+  padding: 20px;
+  text-align: left;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}
+
+.navbar-icon {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.navbar-icon a {
+  color: white;
+}
+
+/* Tambahkan aturan gaya ikon */
+.navbar-icon a i {
+  margin-right: 5px; /* Jarak antara ikon dan teks */
+}
+
+/* Aturan gaya ikon spesifik untuk setiap tautan */
+.navbar-icon a[href="{{ url_for('produk') }}"] i {
+  color: white; /* Warna ikon untuk Produk */
+}
+
+.navbar-icon a[href="{{ url_for('notifikasi') }}"] i {
+  color: white; /* Warna ikon untuk Notifikasi */
+}
+
+.navbar-icon a[href="{{ url_for('pesanan') }}"] i {
+  color: white; /* Warna ikon untuk Pesanan */
+}
+
+.navbar-icon
+  a[href="{{ url_for('chat_pembeli', username='nama_pengguna') }}"]
+  i {
+  color: white; /* Warna ikon untuk Chat Pembeli */
+}
+
+.navbar-icon a[href="{{ url_for('distributor') }}"] i {
+  color: white; /* Warna ikon untuk Channel Distributor */
+}
+
+.navbar-icon a[href="{{ url_for('profil') }}"] i {
+  color: white; /* Warna ikon untuk Profil */
+}
+
+#time-weather {
+  margin-top: auto; /* Mengatur agar elemen di bawah profil */
+  padding: 5px;
+  background-color: #f5f5f5; /* Menyesuaikan warna latar belakang */
+  border-top: 1px solid #ddd; /* Menambahkan garis pemisah */
+}
+
+#time,
+#weather {
+  padding-bottom: 15px;
+}
+
+.inbox-container {
+  max-width: 1180px;
+  margin-top: 20px;
+  margin-right: 50px; /* Mengatur sisi kanan secara otomatis */
+  margin-left: auto; /* Mengatur sisi kiri secara otomatis */
+  padding: 20px;
+}
+
+.inbox-container h2 {
+  text-align: center; /* Memposisikan teks ke tengah */
+  font-size: 34px; /* Atur ukuran font */
+}
+
+.message-list {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.message {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.message-sender {
+  font-weight: bold;
+  color: #2599c4;
+  padding: 10px;
+  font-size: 22px; /* Atur ukuran font */
+}
+
+.message-content {
+  margin-top: 5px;
+  color: #333;
+  padding: 10px;
+  font-size: 19px; /* Atur ukuran font */
+}
+
+.message-timestamp {
+  font-size: 1.1em;
+  color: #777;
+  padding: 10px;
+}

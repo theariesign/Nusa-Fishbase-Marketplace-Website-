@@ -1,0 +1,25 @@
+{% extends "base_penjual.html" %} {% block content %}
+<div class="header">
+  <h1>Profil</h1>
+</div>
+<a
+  href="{{ url_for('edit_profil') }}"
+  class="btn btn-primary mb-3"
+  style="margin-top: 15px; width: 100%; font-size: 20px"
+  >Edit Profil</a
+>
+<div class="table-container">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Email:</th>
+        <td>{{ profile['email'] }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Nomor Telepon:</th>
+        <td>{{ profile['phone'] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

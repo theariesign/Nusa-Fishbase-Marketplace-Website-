@@ -1,0 +1,51 @@
+{% extends 'admin_dashboard.html' %} {% block content %}
+<div class="card mb-4" id="manage-blog-section">
+  <div class="card-header">Manage Blog</div>
+  <div class="card-body">
+    <a href="{{ url_for('add_blog') }}" class="btn btn-success mb-3"
+      >Tambah Blog</a
+    >
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Gambar</th>
+            <th>Judul</th>
+            <th>Tanggal Publish</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for article in articles %}
+          <tr>
+            <td>
+              <img
+                src="{{ url_for('static', filename='images/blogkonten/' + article.image) }}"
+                alt="{{ article.title }}"
+                style="max-width: 100px"
+              />
+            </td>
+            <td>{{ article.title }}</td>
+            <td>{{ article.published_date }}</td>
+            <td>
+              <a
+                href="{{ url_for('edit_article', article_id=article._id|string) }}"
+                class="btn btn-primary"
+                >Edit</a
+              >
+              <form
+                action="{{ url_for('delete_article', article_id=article._id|string) }}"
+                method="post"
+                style="display: inline-block"
+              >
+                <button type="submit" class="btn btn-danger">Hapus</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
